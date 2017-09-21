@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+
+<body>
+    <ul>
+        <li><a href="">1</a></li>
+        <li><a href="">2</a></li>
+        <li><a href="">3</a></li>
+        <li><a href="">4</a></li>
+        <li><a href="">5</a></li>
+        <li><a href="">6</a></li>
+        <li><a href="">7</a></li>
+        <li><a href="">8</a></li>
+        <li><a href="">9</a></li>
+    </ul>
+    <script>
+        let ul = document.querySelector('ul');
+        let li = ul.querySelectorAll('li');
+        let inDirect, outDirect;
+        for (let i = 0; i < li.length; i++) {
+            li[i].addEventListener('mouseenter', (e) => {
+                let a = li[i].querySelector('a');
+                let x = e.clientX - li[i].offsetLeft;
+                let y = e.clientY - li[i].offsetTop;
+                let w = li[i].clientWidth;
+                let h = li[i].clientHeight;
+                if (x >= y && (w - x) > y) {
+                    inDirect = 'in-top'
+                }
+                if (x > y && (h - y) < x) {
+                    inDirect = 'in-right'
+                }
+                if (x < y && (h - x) < y) {
+                    inDirect = 'in-bottom'
+                }
+                if (x < y && (w - x) > y) {
+                    inDirect = 'in-left'
+                }
+
+                a.className = inDirect
+            })
+            li[i].addEventListener('mouseleave', (e) => {
+                let a = li[i].querySelector('a');
+                let x = e.clientX - li[i].offsetLeft;
+                let y = e.clientY - li[i].offsetTop;
+                let w = li[i].clientWidth;
+                let h = li[i].clientHeight;
+                if (y < x && y < (w - x)) {
+                    outDirect = 'out-top'
+                }
+                if (x > y && (h - y) < x) {
+                    outDirect = 'out-right'
+                }
+                if (y > x && (w - x) < y) {
+                    outDirect = 'out-bottom'
+                }
+                if (x < y && x < (h - y)) {
+                    outDirect = 'out-left'
+                }
+
+                a.className = outDirect
+            })
+        }
+    </script>
+</body>
+
+</html>
